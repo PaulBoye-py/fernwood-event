@@ -141,7 +141,7 @@ function App() {
             <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 sm:px-5 py-3 mb-8 sm:mb-10 animate-fade-in-up animation-delay-500 opacity-0 text-xs sm:text-sm">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 sm:w-5 h-4 sm:h-5 text-fernwood-green" />
-                <span className="text-white font-medium">February 28, 2026</span>
+                <span className="text-white font-medium">February , 2026</span>
               </div>
               <span className="hidden sm:inline text-fernwood-slate">•</span>
               <span className="text-fernwood-slate">9:00 AM – 3:00 PM WAT</span>
@@ -206,7 +206,7 @@ function App() {
                 </div>
                 <div>
                   <p className="font-mono text-xs text-fernwood-slate uppercase tracking-wider mb-1">Date</p>
-                  <p className="text-white font-semibold text-lg">February 28, 2026</p>
+                  <p className="text-white font-semibold text-lg">February 27, 2026</p>
                 </div>
               </div>
 
