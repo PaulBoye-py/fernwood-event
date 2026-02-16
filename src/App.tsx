@@ -32,6 +32,22 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const carousel = document.getElementById('speakersCarousel');
+    if (!carousel) return;
+
+    const scroll = () => {
+      if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+        carousel.scrollLeft = 0;
+      } else {
+        carousel.scrollLeft += 1;
+      }
+    };
+
+    const interval = setInterval(scroll, 30);
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -39,6 +55,44 @@ function App() {
       setMobileMenuOpen(false);
     }
   };
+
+  const speakers = [
+    {
+      id: 1,
+      name: "To be Announced",
+      picture: "/speaker-1.jpg",
+      title: "",
+      bio: "",
+    },
+    {
+      id: 2,
+      name: "To be Announced",
+      picture: "/speaker-2.jpg",
+      title: "",
+      bio: "",
+    },
+    {
+      id: 3,
+      name: "Osinachi Okpara",
+      picture: "/speaker-3.jpg",
+      title: "Software Engineer & Developer Advocate",
+      bio: "Osinachi Okpara is a software engineer and developer advocate, with interests in AI engineering, cloud engineering, and open-source software. He is recognised as an AWS Community Builder. He has spoken at major developer conferences, including Google DevFest, AWS Community Day West Africa, and Google Build with AI. He also writes on Medium, AWS Builder Centre, and EverythingDevOps and blogs on Substack."
+    },
+    {
+      id: 4,
+      name: "To be Announced",
+      picture: "/speaker-4.jpg",
+      title: "",
+      bio: "",
+    },
+    {
+      id: 5,  
+      name: "To be Announced",
+      picture: "/speaker-5.jpg",
+      title: "",
+      bio: "",
+    }
+  ]
 
   const LUMA_EVENT_ID = 'evt-fGRX3jAL31GE7gI';
 
@@ -332,25 +386,94 @@ function App() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="glass-card rounded-2xl p-6 text-center hover:border-fernwood-green/30 transition-all duration-300 group">
-                  <div className="relative mx-auto mb-5">
-                    <div className="w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-fernwood-green/30 group-hover:border-fernwood-green transition-colors">
-                      <img 
-                        src={`/speaker-${i}.jpg`} 
-                        alt={`Speaker ${i}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-fernwood-green flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-fernwood-navy" />
-                    </div>
-                  </div>
-                  <h3 className="font-heading font-bold text-white mb-1">To Be Announced</h3>
-                  <p className="text-fernwood-slate text-sm">Speaker details coming soon</p>
+            <div className="relative">
+              <div className="overflow-hidden">
+                <div className="flex gap-6 pb-2" id="speakersCarousel" style={{ overflowX: 'hidden' }}>
+                  {speakers.map((speaker) => {
+                    const [isOpen, setIsOpen] = useState(false);
+                    return (
+                      <div 
+                        key={speaker.id} 
+                        className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 snap-center"
+                      >
+                        <button
+                          onClick={() => setIsOpen(true)}
+                          className="glass-card rounded-2xl p-6 text-center hover:border-fernwood-green/30 transition-all duration-300 group w-full h-full cursor-pointer"
+                        >
+                          <div className="relative mx-auto mb-5">
+                            <div className="w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-fernwood-green/30 group-hover:border-fernwood-green transition-colors">
+                              <img 
+                                src={speaker.picture} 
+                                alt={`Speaker ${speaker.name}`}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                            <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-fernwood-green flex items-center justify-center">
+                              <Sparkles className="w-4 h-4 text-fernwood-navy" />
+                            </div>
+                          </div>
+                          <h3 className="font-heading font-bold text-white mb-1">{speaker.name}</h3>
+                          <p className="text-fernwood-slate text-sm">{speaker.title}</p>
+                        </button>
+
+                        {/* Modal */}
+                        {isOpen && (
+                          <div 
+                            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 animate-fade-in"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <div 
+                              className="bg-fernwood-navy border border-white/10 rounded-2xl p-6 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scale-in"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <button
+                                type="button"
+                                aria-label="Close modal"
+                                onClick={() => setIsOpen(false)}
+                                className="float-right text-fernwood-slate hover:text-white"
+                              >
+                                <X className="w-6 h-6" />
+                              </button>
+                              
+                              <div className="flex flex-col sm:flex-row gap-6 items-start">
+                                <div className="w-32 h-32 rounded-xl overflow-hidden border border-fernwood-green/30 flex-shrink-0 mx-auto sm:mx-0">
+                                  <img 
+                                    src={speaker.picture} 
+                                    alt={speaker.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                
+                                <div className="flex-1">
+                                  <h2 className="font-heading font-bold text-2xl text-white mb-2">{speaker.name}</h2>
+                                  <p className="text-fernwood-green font-semibold mb-4">{speaker.title}</p>
+                                  <p className="text-fernwood-slate leading-relaxed">{speaker.bio}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-              ))}
+              </div>
+              
+              {/* Carousel Controls */}
+              <div className="flex justify-center gap-3 mt-8">
+                <button
+                  onClick={() => document.getElementById('speakersCarousel')?.scrollBy({ left: -300, behavior: 'smooth' })}
+                  className="w-10 h-10 rounded-full bg-fernwood-green/20 hover:bg-fernwood-green/40 text-fernwood-green transition-colors"
+                >
+                  ‹
+                </button>
+                <button
+                  onClick={() => document.getElementById('speakersCarousel')?.scrollBy({ left: 300, behavior: 'smooth' })}
+                  className="w-10 h-10 rounded-full bg-fernwood-green/20 hover:bg-fernwood-green/40 text-fernwood-green transition-colors"
+                >
+                  ›
+                </button>
+              </div>
             </div>
 
             <div className="mt-10 text-center">
@@ -458,6 +581,11 @@ function App() {
               <Button 
                 variant="outline" 
                 className="border-white/20 text-white hover:bg-white/5 hover:border-fernwood-green/50"
+                onClick={() => {
+                  const address = "7 Ibiyinka Olorunbe, Victoria Island, Lagos 101241, Lagos";
+                  const encodedAddress = encodeURIComponent(address);
+                  window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank');
+                }}
               >
                 <MapPin className="w-4 h-4 mr-2" />
                 Get directions
