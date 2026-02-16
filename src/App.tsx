@@ -80,9 +80,9 @@ function App() {
     },
     {
       id: 4,
-      name: "To be Announced",
+      name: "Chisom Jude",
       picture: "/speaker-4.jpg",
-      title: "",
+      title: "Senior DevOps & Site Reliability Engineer",
       bio: "Chisom is a Senior DevOps and Site Reliability Engineer with over 6 years of experience spanning the Fintech, Cloud Provider, and Professional Services sectors. She specializes in building and maintaining reliable, scalable infrastructure, automating workloads, and observability at scale. Beyond her technical work, Chisom is deeply passionate about growing tech communities across Africa. She currently mentors and leads several communities, including She Code Africa Lagos, AWS Cloud Security User Group West Africa, and the HandsOn DevOps Community.",
     },
     {
