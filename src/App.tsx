@@ -59,17 +59,17 @@ function App() {
   const speakers = [
     {
       id: 1,
-      name: "To be Announced",
+      name: "Ukeme Eseme",
       picture: "/speaker-1.jpg",
-      title: "",
-      bio: "",
+      title: "Software, Cloud, and DevOps Engineer | AWS Community Builder",
+      bio: "Ukeme David Eseme is a seasoned Software, Cloud, and DevOps Engineer, as well as an AWS Community Builder, with deep expertise in software development, Artificial Intelligence, cloud infrastructure, and blockchain. He has contributed to globally recognized organizations, including Age of Learning (California), Supra Oracles (Miami), Alphaday (Singapore), and Nethermind (London), driving innovation at the intersection of AI, DevOps, software engineering, and blockchain technology.",
     },
     {
       id: 2,
-      name: "To be Announced",
+      name: "Joshua Omobola",
       picture: "/speaker-2.jpg",
-      title: "",
-      bio: "",
+      title: "AI Educator & Developer Advocate",
+      bio: "Joshua Omobola is an AI Educator and Developer Advocate who is currently helping Attention Factory drive practical AI adoption and empower business leaders to build, ship, and improve AI-powered products and initiatives more confidently and efficiently.",
     },
     {
       id: 3,
